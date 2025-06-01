@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тайный вход</title>
+  <style>
+    body {
+      background-color: #1a1a1a;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #passwordPrompt {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 300px;
+      padding: 20px;
+      background-color: #2a2a2a;
+      font-style: italic;
+      font-weight: bold;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      margin: 40px auto;
+    }
+    input[type="password"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 80%;
+      margin-bottom: 15px;
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+    }
+    input[type="password"].error {
+      border: 2px solid red;
+      animation: shake 0.4s ease;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+    #submitBtn {
+      background-color: #444;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 10px 20px;
+      color: #fff;
+      font-size: 16px;
+    }
+    #protectedContent {
+      display: none;
+      width: 90%;
+      max-width: 700px;
+      padding: 30px;
+      background-color: #333;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+      margin: 20px auto;
+      border-radius: 10px;
+    }
+    iframe, img, video, audio {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+    #cyberpunkError {
+      display: none;
+      margin: 20px auto;
+      width: 500px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="passwordPrompt">
+  <label for="password">ТЕТРАДЬ СМЕРТИ:</label>
+  <input type="password" id="password" placeholder="Введи код, брат" autofocus>
+  <button id="submitBtn" type="button">Войти</button>
+</div>
+
+<div id="protectedContent">
+  <p>Ты вошёл. Добро пожаловать в тайную зону:</p>
+  <img src="https://res.cloudinary.com/dl2siyprg/image/upload/v1748271430/%D0%9F%D0%9E%D0%A0%D0%A2%D0%A0%D0%95%D0%A2_%D0%9C%D0%95%D0%9D%D0%AF_hwihj9.jpg" alt="портрет">
+  <video src="https://res.cloudinary.com/dl2siyprg/video/upload/v1748271238/%D0%92%D0%B5%D1%80%D0%BA%D0%B8%D0%BD_%D1%80%D0%B0%D0%B7%D1%8A%D1%91%D0%B1_fyqnka.mp4" controls></video>
+  <audio controls>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
+</div>
+
+<div id="cyberpunkError">
+  <video src="https://res.cloudinary.com/dl2siyprg/video/upload/v1748270987/%D0%9F%D0%B0%D1%82%D1%80%D0%BE%D0%BD%D1%8B_f2bkmo.mp4" autoplay muted loop></video>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
+    const protectedContent = document.getElementById("protectedContent");
+    const errorContent = document.getElementById("cyberpunkError");
+
+    function checkPassword() {
+      const entered = passwordInput.value.trim();
+      if (entered === "Cara2010") {
+        protectedContent.style.display = "block";
+        errorContent.style.display = "none";
+        passwordInput.classList.remove("error");
+        document.getElementById("passwordPrompt").style.display = "none";
+      } else {
+        protectedContent.style.display = "none";
+        errorContent.style.display = "block";
+        passwordInput.classList.add("error");
+      }
+    }
+
+    submitBtn.addEventListener("click", checkPassword);
+    passwordInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") checkPassword();
+    });
+  });
+</script>
+
+</body>
+</html>
